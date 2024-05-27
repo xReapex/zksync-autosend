@@ -21,7 +21,7 @@ async function l2transfer() {
 
 const timeout = setInterval(async () => {
     // Check if more or equal than token in specific token
-    if ( (Number(await wallet.getBalance(tokenAddress))/1000000).toString() >= '5') // threshold in token
+    if ( (Number(await wallet.getBalance(tokenAddress))/1000000) >= 5) // threshold in token
         {
             l2transfer();
             clearInterval(timeout);

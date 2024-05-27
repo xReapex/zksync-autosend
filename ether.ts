@@ -25,4 +25,4 @@ const timeout = setInterval(async () => {
             clearInterval(timeout);
             l2transfer();
         }
-}, 1000)
+}, 100)
