@@ -20,7 +20,7 @@ async function l2transfer() {
 
 const timeout = setInterval(async () => {
     // Check if more or equal than X value in ETH
-    if (ethers.utils.formatUnits(await wallet.getBalance()) >= '0.006') 
+    if (ethers.utils.formatUnits(await wallet.getBalance()) >= '0.006') // threshold in ETH
         {
             clearInterval(timeout);
             l2transfer();

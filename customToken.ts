@@ -1,34 +1,29 @@
-import { Wallet, Provider, utils, types } from "zksync-ethers";
+import { Wallet, Provider, types } from "zksync-ethers";
 import * as config from './config.json';
-import * as ethers from "ethers";
 
 const provider = Provider.getDefaultProvider(types.Network.Mainnet);
 const wallet = new Wallet(config.PRIVATE_KEY, provider);
  
+const tokenAddress = "0x493257fd37edb34451f62edf8d2a0c418852ba4c" // USDT
 async function l2transfer() {
 
-    // Transfer USDT
+    // Transfer tokenAddress
     const transferHandle = await wallet.transfer({
         to: config.destAddress,
-        token: '0x493257fd37edb34451f62edf8d2a0c418852ba4c',
-        amount: await wallet.getBalance('0x493257fd37edb34451f62edf8d2a0c418852ba4c'),
+        token: tokenAddress,
+        amount: await wallet.getBalance(tokenAddress),
     });
     
     const tx = await transferHandle.wait();
     
-    console.log(`Transferred to ${tx.to} \nTx hash: ${tx.hash}`);
+    console.log(`Transferred to ${tx.to} \nTx hash: ${tx.transactionHash}`);
 }
 
-l2transfer();
-
-
 const timeout = setInterval(async () => {
-    // Check if more or equal than X value in ETH
-    ethers.BigNumber.from()
-    console.log(await wallet.getBalance('0x493257fd37edb34451f62edf8d2a0c418852ba4c'))
-    /*if (await wallet.getBalance('0x493257fd37edb34451f62edf8d2a0c418852ba4c') >= '0.006') 
+    // Check if more or equal than token in specific token
+    if ( (Number(await wallet.getBalance(tokenAddress))/1000000).toString() >= '5') // threshold in token
         {
             l2transfer();
             clearInterval(timeout);
-        }*/
+        }
 }, 100)
