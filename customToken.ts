@@ -1,10 +1,12 @@
 import { Wallet, Provider, types } from "zksync-ethers";
 import * as config from './config.json';
 
-const provider = Provider.getDefaultProvider(types.Network.Mainnet);
+//const provider = new Provider("rpc url")
+const provider = Provider.getDefaultProvider(types.Network.Mainnet); // Default
 const wallet = new Wallet(config.PRIVATE_KEY, provider);
  
 const tokenAddress = "0x493257fd37edb34451f62edf8d2a0c418852ba4c" // USDT
+
 async function l2transfer() {
 
     // Transfer tokenAddress
